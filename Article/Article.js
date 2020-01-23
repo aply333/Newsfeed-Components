@@ -112,3 +112,62 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+let articleSection = document.querySelector('.articles');
+
+function articleTitle (h2Text){
+  const h2 = document.createElement('h2');
+  h2.textContent = h2Text;
+  return h2;
+};
+
+function datePara (date){
+  const p = document.createElement('p');
+  p.textContent = date;
+  p.classList.add('date');
+  return p;
+}
+
+function genericPara (content){
+  const p = document.createElement('p');
+  p.textContent = content;
+  p.classList.add('articleStatus');
+  return p;
+}
+
+
+// function expandButton (){
+//   const span = document.createElement('span');
+//   // let parent = this.span.parentElement;
+//   span.classList.add('expandButton');
+//   span.textContent ='read more...';
+//   span.style.cursor = 'pointer';
+//   span.addEventListener('click', ()=>{
+//     .toggle('article-open');
+//   })
+//   return span;
+// }
+
+function createArticle (h2Text,date,p1,p2,p3){
+  let div = document.createElement('div');
+  let span = document.createElement('span');
+    span.classList.add('expandButton');
+    span.textContent = 'Click to Open';
+    span.addEventListener('click', ()=>{
+      div.classList.toggle('article-open');
+      span.textContent = 'Click to Close';
+    })
+  div.classList.add('article');
+  div.appendChild(articleTitle(h2Text));
+  div.appendChild(datePara(date));
+  div.appendChild(genericPara(p1));
+  div.appendChild(genericPara(p2));
+  div.appendChild(genericPara(p3));
+  div.appendChild(span);
+  return div;
+}
+
+data.forEach((cV)=>{
+  articleSection.appendChild(createArticle(cV.title,cV.date,cV.firstParagraph,cV.secondParagraph,cV.thirdParagraph))
+})
+
+// articleSection.appendChild(createArticle(data[0].title,data[0].date,data[0].firstParagraph,data[0].secondParagraph,data[0].thirdParagraph));
